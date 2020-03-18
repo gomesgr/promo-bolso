@@ -106,8 +106,16 @@ def encontrar_ganhador(tabela, numero_sorteado):
     return (ganhadores, qtd_participacoes)
 
 if __name__ == '__main__':
-    serie_encontrada_sorteio = '35'
-    elemento_sorteavel = '01176'
+    cont = 0
+    numeros_sorte = []
+    while cont < 5:
+        numeros_sorte.append(str(input('Digite os valores do resultado da loteria ex.: xx.yyy,yyy: ')))
+        cont += 1
+    
+    elemento_sorteavel = ''.join([x[-1] for x in numeros_sorte])
+    serie_encontrada_sorteio = ''.join([numeros_sorte[x][3] for x in range(2)])
+    
+        
     filename = 'dados_promo.csv'
     with open(filename) as f:
         tabela = DictReader(f)
@@ -115,10 +123,11 @@ if __name__ == '__main__':
     serie_final = str(verificar_serie(int(serie_encontrada_sorteio), maior_serie))
     f = pd.read_csv(filename)
     tabela = pd.DataFrame(f)
+
     ls = sorteaveis(tabela, serie_final, elemento_sorteavel)
     start = listar_sorteaveis(ls, (str(serie_final) + elemento_sorteavel))
     ls.sort()
-    ganhador = iterar_lista(ls, start)
-    
+
+    ganhador = iterar_lista(ls, start)  
     ganhadores = encontrar_ganhador(tabela, ganhador)
     print(f'Ganhador foi o.O CPF {ganhadores[0][0].cpf}, num. de tentativa(s): {ganhadores[1]}')
