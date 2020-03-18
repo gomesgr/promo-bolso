@@ -106,7 +106,7 @@ def encontrar_ganhador(tabela, numero_sorteado):
     return (ganhadores, qtd_participacoes)
 
 if __name__ == '__main__':
-    serie_encontrada_sorteio = '00'
+    serie_encontrada_sorteio = '35'
     elemento_sorteavel = '01176'
     filename = 'dados_promo.csv'
     with open(filename) as f:
